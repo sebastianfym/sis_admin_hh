@@ -47,7 +47,7 @@ def parser(area_id, vacancy, url):
                         chrome_options.add_argument('--no-sandbox')
                         driver = webdriver.Chrome(executable_path=chromedriver_path,
                                                   chrome_options=chrome_options)  # Используйте соответствующий WebDriver
-
+                        print(url)
                         driver.get(url)
                         # button = driver.find_element(By.CSS_SELECTOR, '[data-qa="oauth-grant-allow"]')
                         wait = WebDriverWait(driver, 10)
