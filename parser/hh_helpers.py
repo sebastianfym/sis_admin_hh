@@ -1,4 +1,6 @@
 import json
+import os
+
 from openpyxl import Workbook
 from bs4 import BeautifulSoup
 import requests
@@ -33,6 +35,7 @@ def parser(area_id, vacancy, url):
                 try:
                     try:
                         chromedriver_path = '/usr/local/bin/chromedriver'
+                        os.environ["PATH"] += os.pathsep + chromedriver_path
 
                         chrome_options = Options()
                         chrome_options.add_argument('--headless')
