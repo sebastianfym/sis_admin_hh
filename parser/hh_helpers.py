@@ -71,5 +71,5 @@ def parser(area_id, vacancy, url):
             # for row in data_for_vacancy:
             #     sheet.append(row)
 
-    else:
-        print("Failed to retrieve data. Status code:", response.status_code)
+        else:
+            print("Failed to retrieve data. Status code:", response.status_code)
