@@ -31,76 +31,81 @@ def parser(area_id, vacancy, url):
             data = json.loads(response.text)
             vacancies = data.get("items", [])
 
+            workbook = Workbook()
+            sheet = workbook.active
+            data = json.loads(response.text)
+            sheet.append(['Вакансия', 'Адрес', 'Сотрудник', 'Контакт', 'Зарплата'])
+
+            vacancies = data.get("items", [])
+            data_for_vacancy = []
             for vacancy in vacancies:
+                # data_for_vacancy.append([vacancy['salary'], vacancy['name'], vacancy['address'], vacancy['employer'], vacancy['contacts']])  # Выводит каждую вакансию в виде словаря
+
                 try:
                     try:
                         chromedriver_path = '/usr/local/bin/chromedriver'
-                        os.environ["PATH"] += os.pathsep + chromedriver_path
 
                         chrome_options = Options()
                         chrome_options.add_argument('--headless')
                         chrome_options.add_argument('--disable-gpu')
                         chrome_options.add_argument('--no-sandbox')
-                        driver = webdriver.Chrome(executable_path=chromedriver_path, options=chrome_options)
-
-                        contact_url = vacancy['employer']['alternate_url'] + "/contacts"
-                        driver.get(contact_url)
+                        driver = webdriver.Chrome(executable_path=chromedriver_path,
+                                                  chrome_options=chrome_options)  # Используйте соответствующий WebDriver
+                        print(url)
+                        driver.get(url)
                         wait = WebDriverWait(driver, 10)
+                        contact_button = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@data-qa='show-employer-contacts']")))
+
+                        contact_button.click()
                         phone_element = wait.until(EC.presence_of_element_located((By.XPATH, "//a[@href^='tel:']")))
                         phone_number = phone_element.text
                         print(phone_number)
                         driver.quit()
 
+                        return 200
                     except requests.exceptions.RequestException as e:
                         print(f"Ошибка: {e}")
 
-                except TypeError as e:
-                    print(e)
+                    print(vacancy['alternate_url'])
+                except TypeError:
+                    continue
                 print("-" * 40)
 
+            else:
+                print("Failed to retrieve data. Status code:", response.status_code)
+
+
+def parse_vacancies(url):
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless")  # Запуск браузера без UI
+    driver = webdriver.Chrome(options=options)
+
+    driver.get(url)
+    wait = WebDriverWait(driver, 10)
+
+    all_vacancies = []
+
+    while True:
+        vacancies = driver.find_elements(By.CSS_SELECTOR, "div.vacancy-serp-item")
+
+        for vacancy in vacancies:
+            title_element = vacancy.find_element(By.CSS_SELECTOR, "a[data-qa='vacancy-serp__vacancy-title']")
+            title = title_element.text
+
+            salary_element = vacancy.find_element(By.CSS_SELECTOR, "span[data-qa='vacancy-serp__vacancy-compensation']")
+            salary = salary_element.text if salary_element.text else "Зарплата не указана"
+
+            phone_element = vacancy.find_element(By.CSS_SELECTOR, "a[data-qa='vacancy-serp__vacancy-employer-phone']")
+            phone_number = phone_element.get_attribute("href").replace("tel:", "") if phone_element.get_attribute("href") else "Номер не указан"
+
+            all_vacancies.append({"title": title, "salary": salary, "phone": phone_number})
+
+        next_page_button = driver.find_element(By.CSS_SELECTOR, "a[data-qa='pager-next']")
+        if next_page_button.is_enabled():
+            next_page_button.click()
+            wait.until(EC.staleness_of(vacancies[0]))  # Ждем, пока обновится список вакансий
         else:
-            print("Failed to retrieve data. Status code:", response.status_code)
+            break
 
-
-    #     workbook = Workbook()
-        #     sheet = workbook.active
-        #     data = json.loads(response.text)
-        #     sheet.append(['Вакансия', 'Адрес', 'Сотрудник', 'Контакт', 'Зарплата'])
-        #
-        #     vacancies = data.get("items", [])
-        #     data_for_vacancy = []
-        #     for vacancy in vacancies:
-        #         # data_for_vacancy.append([vacancy['salary'], vacancy['name'], vacancy['address'], vacancy['employer'], vacancy['contacts']])  # Выводит каждую вакансию в виде словаря
-        #
-        #         try:
-        #             try:
-        #                 chromedriver_path = '/usr/local/bin/chromedriver'
-        #
-        #                 chrome_options = Options()
-        #                 chrome_options.add_argument('--headless')
-        #                 chrome_options.add_argument('--disable-gpu')
-        #                 chrome_options.add_argument('--no-sandbox')
-        #                 driver = webdriver.Chrome(executable_path=chromedriver_path,
-        #                                           chrome_options=chrome_options)  # Используйте соответствующий WebDriver
-        #                 print(url)
-        #                 driver.get(url)
-        #                 wait = WebDriverWait(driver, 10)
-        #                 contact_button = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@data-qa='show-employer-contacts']")))
-        #
-        #                 contact_button.click()
-        #                 phone_element = wait.until(EC.presence_of_element_located((By.XPATH, "//a[@href^='tel:']")))
-        #                 phone_number = phone_element.text
-        #                 print(phone_number)
-        #                 driver.quit()
-        #
-        #                 return 200
-        #             except requests.exceptions.RequestException as e:
-        #                 print(f"Ошибка: {e}")
-        #
-        #             print(vacancy['alternate_url'])
-        #         except TypeError:
-        #             continue
-        #         print("-" * 40)
-        #
-        # else:
-        #     print("Failed to retrieve data. Status code:", response.status_code)
+    driver.quit()
+    return all_vacancies
