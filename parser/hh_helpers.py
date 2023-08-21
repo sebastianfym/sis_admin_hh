@@ -51,8 +51,8 @@ def parser(area_id, vacancy, url):
                     except requests.exceptions.RequestException as e:
                         print(f"Ошибка: {e}")
 
-                except TypeError:
-                    continue
+                except TypeError as e:
+                    print(e)
                 print("-" * 40)
 
         else:
