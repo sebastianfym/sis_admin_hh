@@ -1,0 +1,20 @@
+1)	test_client = GoogleSheetInteraction('test-project-fym-1-282f87f76ddb.json', None)
+#)	test_client - используется, что бы подключиться к уже готовой таблице (None заменить на spreadsheetId),
+либо для создаия новой
+2)	test_client.create_user_sheet("User table", 'Avito', 1500, 650)
+3)	test_client.fill_table("Авито настройки", "A1", "ES1362", test_dev.read_from_sheets("Настройки Авито", "A1", "ES1362"))
+
+Этот набор комманд используется для созданием пользователя абсолютно новой табицы.
+По итогу отработки комманд пользователь создаст для себя новую (основную) таблицу с хэдером, а так же заполненную
+страницу настроек
+________________________________________________________________________________________________________________________
+1)	test_dev = GoogleSheetInteraction('test-project-fym-1-282f87f76ddb.json', spreadsheetId)
+#) test_dev - должен быть всегда, он должен быть подключен к основной таблице с шаблонами,
+откуда будут заполняться таблицы пользователя
+3)	list_with_data = test_dev.read_from_sheets("avito", "A2", "BY4")
+4)	creation_and_filling_xml(test_dev.filter_and_collecting_users_data(list_with_data), "xml_test_name")
+
+Этот набор комманд используется для выгрузки данных из подключенной таблицы (spreadsheetId - id таблицы.
+Пример: '1qb5wC5KHhdqdkjaKq5hmaiMJ6nMx-1Na0qA9gCnhAuY') и преобразования их в XML файл.
+Рекомендуется либо создавать файл и сразу с ним работать (в таком случае spreadsheetId будет привязан к
+пользователю с самого создания таблицы), либо явно указывать spreadsheetId при инициализации класса.

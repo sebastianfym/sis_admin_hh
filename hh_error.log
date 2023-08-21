@@ -1,0 +1,175 @@
+INFO:root:Информационное сообщение
+WARNING:root:Предупреждение
+ERROR:root:Ошибка
+CRITICAL:root:Критическая ошибка
+INFO:root:Информационное сообщение
+WARNING:root:Предупреждение
+ERROR:root:Ошибка
+CRITICAL:root:Критическая ошибка
+INFO:root:Информационное сообщение
+WARNING:root:Предупреждение
+ERROR:root:Ошибка
+CRITICAL:root:Критическая ошибка
+INFO:root:Информационное сообщение
+WARNING:root:Предупреждение
+ERROR:root:Ошибка
+CRITICAL:root:Критическая ошибка
+INFO:root:Информационное сообщение
+WARNING:root:Предупреждение
+ERROR:root:Ошибка
+CRITICAL:root:Критическая ошибка
+INFO:root:Информационное сообщение
+WARNING:root:Предупреждение
+ERROR:root:Ошибка
+CRITICAL:root:Критическая ошибка
+WARNING:django.request:Not Found: /favicon.ico
+WARNING:django.request:Not Found: /favicon.ico
+INFO:root:Информационное сообщение
+WARNING:root:Предупреждение
+ERROR:root:Ошибка
+CRITICAL:root:Критическая ошибка
+INFO:root:Информационное сообщение
+WARNING:root:Предупреждение
+ERROR:root:Ошибка
+CRITICAL:root:Критическая ошибка
+INFO:django.utils.autoreload:/Users/user/itpwr/sis_admin_hh/user/admin.py changed, reloading.
+INFO:root:Информационное сообщение
+WARNING:root:Предупреждение
+ERROR:root:Ошибка
+CRITICAL:root:Критическая ошибка
+WARNING:django.request:Method Not Allowed: /parser/get_perm/get_access_token/
+ERROR:django.request:Internal Server Error: /parser/get_perm/get_access_token/
+Traceback (most recent call last):
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/rest_framework/views.py", line 511, in dispatch
+    self.response = self.finalize_response(request, response, *args, **kwargs)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/rest_framework/views.py", line 423, in finalize_response
+    assert isinstance(response, HttpResponseBase), (
+AssertionError: Expected a `Response`, `HttpResponse` or `HttpStreamingResponse` to be returned from the view, but received a `<class 'NoneType'>`
+INFO:django.utils.autoreload:/Users/user/itpwr/sis_admin_hh/parser/views.py changed, reloading.
+INFO:root:Информационное сообщение
+WARNING:root:Предупреждение
+ERROR:root:Ошибка
+CRITICAL:root:Критическая ошибка
+INFO:django.utils.autoreload:/Users/user/itpwr/sis_admin_hh/parser/views.py changed, reloading.
+INFO:root:Информационное сообщение
+WARNING:root:Предупреждение
+ERROR:root:Ошибка
+CRITICAL:root:Критическая ошибка
+ERROR:django.request:Internal Server Error: /parser/get_perm/get_access_token/
+Traceback (most recent call last):
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/user/itpwr/sis_admin_hh/parser/views.py", line 59, in get_access_token
+    get_access_token('GTL5UMU9UDVDU7VO2K2FHJG149GHVJ770CRAO4AL2LPL7NEKSKCBMNINJCAS8GVV')
+  File "/Users/user/itpwr/sis_admin_hh/parser/hh_helpers.py", line 69, in get_access_token
+    boss.refresh_token = None
+    ^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'refresh_token'
+ERROR:django.request:Internal Server Error: /parser/get_perm/get_access_token/
+Traceback (most recent call last):
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/user/itpwr/sis_admin_hh/parser/views.py", line 59, in get_access_token
+    get_access_token('GTL5UMU9UDVDU7VO2K2FHJG149GHVJ770CRAO4AL2LPL7NEKSKCBMNINJCAS8GVV')
+  File "/Users/user/itpwr/sis_admin_hh/parser/hh_helpers.py", line 68, in get_access_token
+    access_token = response_data['access_token']
+                   ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'access_token'
+INFO:django.utils.autoreload:/Users/user/itpwr/sis_admin_hh/parser/hh_helpers.py changed, reloading.
+INFO:root:Информационное сообщение
+WARNING:root:Предупреждение
+ERROR:root:Ошибка
+CRITICAL:root:Критическая ошибка
+INFO:django.utils.autoreload:/Users/user/itpwr/sis_admin_hh/parser/views.py changed, reloading.
+INFO:root:Информационное сообщение
+WARNING:root:Предупреждение
+ERROR:root:Ошибка
+CRITICAL:root:Критическая ошибка
+ERROR:django.request:Internal Server Error: /parser/get_perm/get_auth_token
+Traceback (most recent call last):
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/user/itpwr/sis_admin_hh/venv/lib/python3.11/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8000/parser/get_perm/get_auth_token/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+INFO:django.utils.autoreload:/Users/user/itpwr/sis_admin_hh/parser/views.py changed, reloading.
+INFO:root:Информационное сообщение
+WARNING:root:Предупреждение
+ERROR:root:Ошибка
+CRITICAL:root:Критическая ошибка
+INFO:django.utils.autoreload:/Users/user/itpwr/sis_admin_hh/parser/views.py changed, reloading.
+INFO:root:Информационное сообщение
+WARNING:root:Предупреждение
+ERROR:root:Ошибка
+CRITICAL:root:Критическая ошибка
+INFO:django.utils.autoreload:/Users/user/itpwr/sis_admin_hh/parser/hh_helpers.py changed, reloading.
+INFO:root:Информационное сообщение
+WARNING:root:Предупреждение
+ERROR:root:Ошибка
+CRITICAL:root:Критическая ошибка
+INFO:django.utils.autoreload:/Users/user/itpwr/sis_admin_hh/parser/hh_helpers.py changed, reloading.
+INFO:root:Информационное сообщение
+WARNING:root:Предупреждение
+ERROR:root:Ошибка
+CRITICAL:root:Критическая ошибка
+INFO:django.utils.autoreload:/Users/user/itpwr/sis_admin_hh/parser/hh_helpers.py changed, reloading.
