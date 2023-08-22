@@ -1,6 +1,6 @@
 import json
 import os
-
+from webdriver_manager.chrome import ChromeDriverManager
 from openpyxl import Workbook
 from bs4 import BeautifulSoup
 import requests
@@ -78,8 +78,8 @@ def parser(area_id, vacancy, url):
 def parse_vacancies(url):
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")  # Запуск браузера без UI
-    driver = webdriver.Chrome(options=options)
-
+    # driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome(ChromeDriverManager().install())
     driver.get(url)
     wait = WebDriverWait(driver, 10)
 
