@@ -76,12 +76,12 @@ def parser(area_id, vacancy, url):
 
 
 def parse_vacancies(url):
-    # options = webdriver.ChromeOptions()
-    # options.add_argument("--headless")  # Запуск браузера без UI
-    # driver = webdriver.Chrome(options=options)
-    driver = webdriver.Chrome(ChromeDriverManager().install())
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless")  # Запуск браузера без UI
+    driver = webdriver.Chrome(options=options)
+    # driver = webdriver.Chrome(ChromeDriverManager().install())
     driver.get(url)
-    # wait = WebDriverWait(driver, 10)
+    wait = WebDriverWait(driver, 10)
 
     all_vacancies = []
 
@@ -103,7 +103,7 @@ def parse_vacancies(url):
         next_page_button = driver.find_element(By.CSS_SELECTOR, "a[data-qa='pager-next']")
         if next_page_button.is_enabled():
             next_page_button.click()
-            # wait.until(EC.staleness_of(vacancies[0]))  # Ждем, пока обновится список вакансий
+            wait.until(EC.staleness_of(vacancies[0]))  # Ждем, пока обновится список вакансий
         else:
             break
 
