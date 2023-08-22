@@ -76,8 +76,8 @@ def parser(area_id, vacancy, url):
 
 
 def parse_vacancies(url):
-    options = webdriver.ChromeOptions()
-    options.add_argument("--headless")  # Запуск браузера без UI
+    # options = webdriver.ChromeOptions()
+    # options.add_argument("--headless")  # Запуск браузера без UI
     # driver = webdriver.Chrome(options=options)
     driver = webdriver.Chrome(ChromeDriverManager().install())
     driver.get(url)
