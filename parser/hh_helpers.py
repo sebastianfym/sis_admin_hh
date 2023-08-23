@@ -82,8 +82,7 @@ def parse_vacancies(url):
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--disable-gpu')
     chrome_options.add_argument('--no-sandbox')
-    driver = webdriver.Chrome(executable_path=chromedriver_path,
-                              chrome_options=chrome_options)  # Используйте соответствующий WebDriver
+    driver = webdriver.Chrome(chrome_options=chrome_options)  # Используйте соответствующий WebDriver   executable_path=chromedriver_path,
 
     # options = webdriver.ChromeOptions()
     # options.add_argument("--headless")  # Запуск браузера без UI
