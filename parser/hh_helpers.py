@@ -78,12 +78,15 @@ def parser(area_id, vacancy, url):
 def parse_vacancies(url):
     # chromedriver_path = '/usr/local/bin/chromedriver'
 
-    chrome_options = Options()
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--disable-gpu')
-    chrome_options.add_argument('--no-sandbox')
-    driver = webdriver.Firefox(options=chrome_options)  # Используйте соответствующий WebDriver   executable_path=chromedriver_path, chrome_options=chrome_options
+    # chrome_options = Options()
+    # chrome_options.add_argument('--headless')
+    # chrome_options.add_argument('--disable-gpu')
+    # chrome_options.add_argument('--no-sandbox')
+    # driver = webdriver.Firefox(options=chrome_options)  # Используйте соответствующий WebDriver   executable_path=chromedriver_path, chrome_options=chrome_options
+    firefox_options = Options()
+    firefox_options.headless = True  # Запуск Firefox в режиме headless
 
+    driver = webdriver.Firefox(options=firefox_options)
     # options = webdriver.ChromeOptions()
     # options.add_argument("--headless")  # Запуск браузера без UI
     # driver = webdriver.Chrome(options=options)
