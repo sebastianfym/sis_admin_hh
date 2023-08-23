@@ -2,7 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from parser.hh_helpers import parser, parse_vacancies
+from parser.hh_helpers import parse_vacancies
 from parser.models import Questionnaire
 from parser.serializers import QuestionnaireSerializer
 
