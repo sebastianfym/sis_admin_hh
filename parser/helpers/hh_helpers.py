@@ -2,7 +2,7 @@ import json
 import os
 import time
 from datetime import datetime
-
+from selenium.common.exceptions import NoSuchElementException
 import openpyxl
 import selenium
 from webdriver_manager.chrome import ChromeDriverManager
@@ -17,6 +17,10 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import ElementNotInteractableException
 
 def parse_vacancies(url):
+    workbook = openpyxl.Workbook()
+    sheet = workbook.active
+    sheet.append(['Название вакансии', 'Компания', 'Адрес', 'Опыт', 'контакты'])
+
     chrome_options = Options()
     driver = webdriver.Chrome(options=chrome_options)
 
@@ -25,51 +29,62 @@ def parse_vacancies(url):
     all_vacancies = []
     for page_number in range(1, 11):
         driver.get(f'https://spb.hh.ru/vacancies/sistemnyy_administrator?page={page_number}')
-        vacancies = driver.find_elements(By.CSS_SELECTOR, "div.vacancy-serp-item")
         buttons = driver.find_elements(By.CSS_SELECTOR, 'div.serp-item-controls')
-        time.sleep(30)
+
+        # time.sleep(30)
         for btn in buttons:
-            time.sleep(10)
+            time.sleep(5)
             try:
-                print(btn.text)
+
                 if btn.text == "Показать контакты":
-                    btn = driver.find_element(By.LINK_TEXT, "Показать контакты")
-                    # # a11y-main-content > div:nth-child(2) > div > div.serp-item-controls > button
-                    print(btn)
-                    btn.click()
-                    time.sleep(10)
-                    # result_element = driver.find_element(By.CSS_SELECTOR, 'div.vacancy-contacts')
-                    # result_text = result_element.text
-                    wait = WebDriverWait(driver, 10)
-                    result_element = wait.until(
-                        EC.presence_of_element_located((By.CSS_SELECTOR, 'div.vacancy-contacts'))
-                    )
-                    print(result_element)
+                    div = btn.find_element(By.XPATH, '..')
+
+                    print()#get_attribute("class"))
+                    vacancy_data = div.text.split('\n')
+                    button = btn.find_element(By.TAG_NAME, "button")
+
+                    button.click()
+                    time.sleep(2)
+                    try:
+                        try:
+                            f_e = driver.find_element(By.CSS_SELECTOR, 'div.vacancy-contacts-call-tracking__phones')
+                            # contact_div = driver.find_element(By.CSS_SELECTOR, "div.vacancy-contacts_search")
+                            # print(contact_div)
+                            print(f_e.text)
+                        except NoSuchElementException:
+                            f_e = driver.find_element(By.CSS_SELECTOR, 'div.bloko-drop')
+                            print(f_e.text)
+                    except NoSuchElementException:
+                        f_e = None
 
             except ElementNotInteractableException:
                 print(f'NET: {btn}')
-        # for vacancy in vacancies:
-        #     title_element = vacancy.find_element(By.CSS_SELECTOR, "a[data-qa='vacancy-serp__vacancy-title']")
-        #     title = title_element.text
-        #
-        #     salary_element = vacancy.find_element(By.CSS_SELECTOR, "span[data-qa='vacancy-serp__vacancy-compensation']")
-        #     salary = salary_element.text if salary_element.text else "Зарплата не указана"
-        #
-        #     phone_element = vacancy.find_element(By.CSS_SELECTOR, "a[data-qa='vacancy-serp__vacancy-employer-phone']")
-        #     phone_number = phone_element.get_attribute("href").replace("tel:", "") if phone_element.get_attribute(
-        #         "href") else "Номер не указан"
-        #
-        #     all_vacancies.append({"title": title, "salary": salary, "phone": phone_number})
-        #     print(title_element, title, salary_element, phone_element, phone_number)
+            print()
+            try:
+                if len(vacancy_data) <= 5:
+                    try:
+                        sheet.append([vacancy_data[0], vacancy_data[1], vacancy_data[2], vacancy_data[3], f_e.text])
+                    except selenium.common.exceptions.StaleElementReferenceException:
+                        continue
+                else:
+                    try:
+                        sheet.append([vacancy_data[0], vacancy_data[2], vacancy_data[3], vacancy_data[4], f_e.text])
+                    except selenium.common.exceptions.StaleElementReferenceException:
+                        continue
+            except UnboundLocalError:
+                continue
+
+
         next_page_button = driver.find_element(By.CSS_SELECTOR, "a[data-qa='pager-next']")
         if next_page_button.is_enabled():
             next_page_button.click()
             # wait.until(EC.staleness_of(vacancies[0]))  # Ждем, пока обновится список вакансий
         else:
             break
-
+    file_path = "company_who_search_sys_admin.xlsx"
+    workbook.save(file_path)
     driver.quit()
-    return all_vacancies
+    return workbook
 
 
 def parse_sys_admin_who_work_in_real_time(vacancy, area_id, access_token):

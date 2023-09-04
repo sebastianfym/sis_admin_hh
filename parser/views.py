@@ -53,8 +53,9 @@ class SysAdminInCompany(APIView):
     def get(self, request):
         url = 'https://hh.ru'
         parse_vacancies(url)
-        return Response(200)
-
+        response = FileResponse(open('company_who_search_sys_admin.xlsx', 'rb'))
+        response['Content-Disposition'] = 'attachment; filename="your_filename.csv"'
+        return response
 
 class RefreshAccessDataApiView(APIView):
     def get(self, request, *args, **kwargs):
