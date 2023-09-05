@@ -2,6 +2,8 @@ import json
 import os
 import time
 from datetime import datetime
+
+from django.core.exceptions import ObjectDoesNotExist
 from selenium.common.exceptions import NoSuchElementException
 import openpyxl
 import selenium
@@ -16,10 +18,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import ElementNotInteractableException
 
+from parser.models import Questionnaire
+
+
 def parse_vacancies():
-    workbook = openpyxl.Workbook()
-    sheet = workbook.active
-    sheet.append(['Название вакансии', 'Компания', 'Адрес', 'Опыт', 'контакты'])
+    # workbook = openpyxl.Workbook()
+    # sheet = workbook.active
+    # sheet.append(['Название вакансии', 'Компания', 'Адрес', 'Опыт', 'контакты'])
 
     chrome_options = Options()
     driver = webdriver.Chrome(options=chrome_options)
@@ -63,14 +68,35 @@ def parse_vacancies():
             try:
                 if len(vacancy_data) <= 5:
                     try:
-                        sheet.append([vacancy_data[0], vacancy_data[1], vacancy_data[2], vacancy_data[3], f_e.text])
+                        vacancy = vacancy_data[0]
+                        company = vacancy_data[1]
+                        address = vacancy_data[2]
+                        experience = vacancy_data[3]
+                        contacts = f_e.text
+                        # sheet.append([vacancy_data[0], vacancy_data[1], vacancy_data[2], vacancy_data[3], f_e.text])
                     except selenium.common.exceptions.StaleElementReferenceException:
                         continue
                 else:
                     try:
-                        sheet.append([vacancy_data[0], vacancy_data[2], vacancy_data[3], vacancy_data[4], f_e.text])
+                        vacancy = vacancy_data[0]
+                        company = vacancy_data[2]
+                        address = vacancy_data[3]
+                        experience = vacancy_data[4]
+                        contacts = f_e.text
+                        # sheet.append([vacancy_data[0], vacancy_data[2], vacancy_data[3], vacancy_data[4], f_e.text])
                     except selenium.common.exceptions.StaleElementReferenceException:
                         continue
+                try:
+                    check_questionnaire = Questionnaire.objects.get(contacts=contacts)
+                    # Обработка найденного объекта
+                except ObjectDoesNotExist:
+                    Questionnaire.objects.create(
+                        vacancy=vacancy,
+                        company=company,
+                        address=address,
+                        experience =experience,
+                        contacts=contacts
+                    )
             except UnboundLocalError:
                 continue
 
@@ -81,10 +107,11 @@ def parse_vacancies():
             # wait.until(EC.staleness_of(vacancies[0]))  # Ждем, пока обновится список вакансий
         else:
             break
-    file_path = "company_who_search_sys_admin.xlsx"
-    workbook.save(file_path)
+    # file_path = "company_who_search_sys_admin.xlsx"
+    # workbook.save(file_path)
     driver.quit()
-    return workbook
+    # return workbook
+    return 200
 
 
 def parse_sys_admin_who_work_in_real_time(vacancy, area_id, access_token):

@@ -1,3 +1,4 @@
+import openpyxl
 from django.http import FileResponse
 from rest_framework import viewsets, status
 from rest_framework.response import Response
@@ -57,9 +58,29 @@ class SysAdminInCompany(APIView):
         response['Content-Disposition'] = 'attachment; filename="your_filename.csv"'
         return response
 
+
 class RefreshAccessDataApiView(APIView):
     def get(self, request, *args, **kwargs):
         authorization_code = request.query_params.get('code')
         access_code = get_access_token(authorization_code)
 
         return Response({'detail': f'{access_code}'})
+
+
+class GetSheetAPI(APIView):
+    def get(self, request):
+        workbook = openpyxl.Workbook()
+        sheet = workbook.active
+        sheet.append(['Название вакансии', 'Компания', 'Адрес', 'Опыт', 'контакты'])
+        questionnaires = Questionnaire.objects.filter(read=False)
+        for questionnaire in questionnaires:
+            sheet.append([questionnaire.vacancy, questionnaire.company, questionnaire.address,
+                          questionnaire.experience, questionnaire.contacts])
+            questionnaire.read = True
+            questionnaire.save()
+
+        file_path = "company_who_search_sys_admin.xlsx"
+        workbook.save(file_path)
+        response = FileResponse(open(file_path, 'rb'))
+        response['Content-Disposition'] = f'attachment; filename="company_who_search_sys_admin.csv"'
+        return response
