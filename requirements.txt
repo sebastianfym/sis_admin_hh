@@ -1,3 +1,4 @@
+altgraph==0.17.3
 apiclient==1.0.4
 asgiref==3.7.2
 attrs==23.1.0
@@ -21,6 +22,7 @@ gspread==5.10.0
 h11==0.14.0
 httplib2==0.22.0
 idna==3.4
+macholib==1.16.2
 oauthlib==3.2.2
 openpyxl==3.1.2
 outcome==1.2.0
@@ -28,6 +30,8 @@ packaging==23.1
 protobuf==4.24.0
 pyasn1==0.5.0
 pyasn1-modules==0.3.0
+pyinstaller==6.0.0
+pyinstaller-hooks-contrib==2023.8
 PyJWT==2.8.0
 pyparsing==3.1.1
 PySocks==1.7.1
