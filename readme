@@ -21,3 +21,73 @@ ________________________________________________________________________________
 
 
 127.0.0.1:8000/parser/sys_admin_search_company
+
+
+
+
+Traceback (most recent call last):
+  File "C:\Users\itpw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\itpw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\itpw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\itpw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\itpw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\itpw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\itpw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\itpw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\sys_admin_parser\sys_admin_hh\parser\views.py", line 56, in get
+    parse_vacancies()
+  File "C:\sys_admin_parser\sys_admin_hh\parser\helpers\hh_helpers.py", line 51, in parse_vacancies
+    button.click()
+  File "C:\Users\itpw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\selenium\webdriver\remote\webelement.py", line 94, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "C:\Users\itpw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\selenium\webdriver\remote\webelement.py", line 395, in _execute
+    return self._parent.execute(command, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\itpw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\selenium\webdriver\remote\webdriver.py", line 345, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\itpw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element <button class="bloko-button bloko-button_kind-success bloko-button_scale-small bloko-button_collapsible bloko-button_appearance-outlined" type="button" data-qa="vacancy-serp__vacancy_contacts">...</button> is not clickable at point (542, 650). Other element would receive the click: <div class="text--WoDDytZXbawqYJLLsZFA text_desktop--D0SbacKBrOHJpxU72UiA">...</div>
+  (Session info: chrome=114.0.5735.134)
+Stacktrace:
+Backtrace:
+        GetHandleVerifier [0x0110A813+48355]
+        (No symbol) [0x0109C4B1]
+        (No symbol) [0x00FA5358]
+        (No symbol) [0x00FD5062]
+        (No symbol) [0x00FD3B98]
+        (No symbol) [0x00FD239B]
+        (No symbol) [0x00FD179E]
+        (No symbol) [0x00FC9F5C]
+        (No symbol) [0x00FEA73C]
+        (No symbol) [0x00FC9A36]
+        (No symbol) [0x00FEAA94]
+        (No symbol) [0x00FFC922]
+        (No symbol) [0x00FEA536]
+        (No symbol) [0x00FC82DC]
+        (No symbol) [0x00FC93DD]
+        GetHandleVerifier [0x0136AABD+2539405]
+        GetHandleVerifier [0x013AA78F+2800735]
+        GetHandleVerifier [0x013A456C+2775612]
+        GetHandleVerifier [0x011951E0+616112]
+        (No symbol) [0x010A5F8C]
+        (No symbol) [0x010A2328]
+        (No symbol) [0x010A240B]
+        (No symbol) [0x01094FF7]
+        BaseThreadInitThunk [0x769A7D59+25]
+        RtlInitializeExceptionChain [0x776FB74B+107]
+        RtlClearBits [0x776FB6CF+191]
