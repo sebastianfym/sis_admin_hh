@@ -39,6 +39,7 @@ def parse_vacancies():
         # time.sleep(30)
         for btn in buttons:
             # check = False
+            time.sleep(1)
             if btn.text.startswith('Откликнуться\nПоказать контакты'):
                 # print(btn.text, '43 строка startswitch')
                 div = btn.find_element(By.XPATH, '..')
@@ -52,9 +53,11 @@ def parse_vacancies():
                 try:
                     try:
                         f_e = driver.find_element(By.CSS_SELECTOR, 'div.vacancy-contacts-call-tracking__phones')
+
                                                   # 'bloko-button bloko-button_kind-success bloko-button_scale-small bloko-button_collapsible bloko-button_appearance-outlined')
                         # contact_div = driver.find_element(By.CSS_SELECTOR, "div.vacancy-contacts_search")
                         # print(contact_div)
+                        print(vacancy_data)
                         sheet.append([vacancy_data[0], vacancy_data[1], vacancy_data[2], vacancy_data[4], f_e.text])
                         print(f_e.text, vacancy_data, '58')
                     except NoSuchElementException:
